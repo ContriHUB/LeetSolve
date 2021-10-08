@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import propTypes, { array } from "prop-types";
-
 import {
 	TableContainer,
 	Table,
@@ -10,9 +9,26 @@ import {
 	Th,
 	Td,
 } from "../styles/table";
+import Pagination from "./Pagination";
+
 
 const QuestionsTable = ({ data }) => {
 	console.log("DATA:", data);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [questionPerPage, setQuestionsPerPage] = useState(10);
+	const [questionsForCurrentPage, setQuestionsForCurrentPage] = useState([])
+
+	useEffect(() => {
+		const IndexOfLastQuestion = questionPerPage * currentPage;
+		const IndexOfFirstQuestion = IndexOfLastQuestion -questionPerPage;
+		const dataForThisPage =data["stat_status_pairs"].slice(IndexOfFirstQuestion,IndexOfLastQuestion);
+		setQuestionsForCurrentPage(dataForThisPage);
+	}, [currentPage])
+	const paginate = ({selected})=>
+	{
+		const pageNumber = selected;//0 based indexed
+		setCurrentPage(selected+1)
+	}
 	return (
 		<TableContainer>
 			<Table>
@@ -42,7 +58,7 @@ const QuestionsTable = ({ data }) => {
 					<col span="1" style={{ width: "15%" }} />
 				</colgroup>
 				<TBody>
-					{data["stat_status_pairs"].map((que, index) => {
+					{questionsForCurrentPage.map((que, index) => {
 						return (
 							<Tr key={index}>
 								<Td>{
@@ -76,6 +92,8 @@ const QuestionsTable = ({ data }) => {
 					})}
 				</TBody>
 			</Table>
+			
+			<Pagination pageCount={data["stat_status_pairs"].length/questionPerPage} paginate={paginate}/>
 		</TableContainer>
 	);
 };
