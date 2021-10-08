@@ -21,3 +21,5 @@
 5. API response structure is illustrated in '**src/DummyData/responseStruct.js**'.
 
 6. If you're stuck on an issue and having a hard time understanding the source code for where to even start. Feel free to contact [me](https://github.com/ankitsangwan1999) over the thread of that issue.
+
+7.It would be better if we have topicwise also
