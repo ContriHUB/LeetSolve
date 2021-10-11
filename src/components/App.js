@@ -85,7 +85,7 @@ const App = () => {
 					}}
 				>
 					<span>
-						<Footer/>
+						<Footer Timeout={response.timer}/>
 					</span>
 				</div>
 			</>
