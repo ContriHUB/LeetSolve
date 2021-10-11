@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import emitUserDataEvent from "../helpers/EmitUserDataEvent";
 import Header from "./Header";
+import Footer from "./Footer";
 import PreLoader from "./PreLoader";
 import { backgroundImageProperty } from "../styles/constants";
 import AppContent from "./AppContent";
@@ -65,8 +66,7 @@ const App = () => {
 					}}
 				>
 					<span>
-						Issue:- Footer: Made with Love(Animated Icon) for
-						ContriHub&apos;21. EXISTS. {response.timer}
+						<Footer Timeout={response.timer}/>
 					</span>
 				</div>
 			</>
@@ -85,8 +85,7 @@ const App = () => {
 					}}
 				>
 					<span>
-						Issue:- Footer: Made with Love(Animated Icon) for
-						ContriHub&apos;21. Loading {response.timer}
+						<Footer/>
 					</span>
 				</div>
 			</>
@@ -95,3 +94,5 @@ const App = () => {
 };
 
 export default App;
+//Issue:- Footer: Made with Love(Animated Icon) for
+//						ContriHub&apos;21. EXISTS. {response.timer}
