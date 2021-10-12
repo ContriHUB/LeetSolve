@@ -7,7 +7,7 @@ export const CategoryButton = styled.button`
     color: white;
     font-family: "Cool Font";
     padding: 0.25em 1em;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 5px 10px;
     ${(props) =>
         props &&
         props.active &&

@@ -3,6 +3,9 @@ import QuestionsTable from "./QuestionsTable";
 import AttemptedQuestionsTable from "./AttemptedQuestionsTable";
 import AcQuestionsTable from "./AcQuestionsTable"
 import NotAcQuestionsTable from "./NotAcQuestionsTable"
+import EasyQuestionsTable from "./EasyQuestionsTable"
+import MediumQuestionsTable from "./MediumQuestionsTable"
+import HardQuestionsTable from "./HardQuestionsTable"
 import propTypes from "prop-types";
 
 const TableContent = ({ data, category }) => {
@@ -30,7 +33,22 @@ const TableContent = ({ data, category }) => {
             return (
                 <NotAcQuestionsTable data={data} />
             );
+
+        case 'Easy' :
+            return (
+                <EasyQuestionsTable data={data} />
+            );    
         
+        case 'Medium' :
+            return (
+                 <MediumQuestionsTable data={data} />
+            );
+
+        case 'Hard' :
+            return (
+                 <HardQuestionsTable data={data} />
+            );  
+
         default : 
             return (
                 null
