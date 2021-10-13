@@ -19,17 +19,18 @@ const createWindow = () => {
 		height: 800,
 		minWidth:600,
 		minHeight:600,
+		fullscreen:true,
 		icon: __dirname + "/src/static/images/icon.png",
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
 		},
-		
-		
+
+
 		autoHideMenuBar: true,
 	});
 	cookieJar = session.defaultSession.cookies;
-	
+
 	mainWindow.loadURL(
 		url.format({
 			pathname: path.join(__dirname, "/index.html"),
