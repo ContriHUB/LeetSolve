@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import propTypes, { array } from "prop-types";
 
 import {
@@ -10,9 +10,49 @@ import {
 	Th,
 	Td,
 } from "../styles/table";
+
+import {
+	Pagination,
+	PaginationItem,
+	Prev, 
+	Next
+} from "../styles/pagination";
+
 import { Scrollable } from "../styles/scrollbar";
 
-const QuestionsTable = ({ data }) => {
+const QuestionsTable = ({ data}) => {
+	// const tempData = propTypes.object(data);
+	const dataLimit = 11;
+	const pageLimit = 5;
+
+	const [pages] = useState(Math.round( data["stat_status_pairs"].length / dataLimit));
+	const [currentPage, setCurrentPage] = useState(1);
+
+	function goToNextPage() {
+		setCurrentPage((page) => page + 1);
+	}
+
+	function goToPreviousPage() {
+		setCurrentPage((page) => page - 1);
+	}
+
+	function changePage(event) {
+		console.log("called");
+		const pageNumber = Number(event.target.textContent);
+		setCurrentPage(pageNumber);
+	}
+
+	const getPaginatedData = () => {
+		const startIndex = currentPage * dataLimit - dataLimit;
+		const endIndex = startIndex + dataLimit;
+		return data["stat_status_pairs"].slice(startIndex, endIndex);
+	};
+
+	const getPaginationGroup = () => {
+		let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+		return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
+	};
+
 	console.log("DATA:", data);
 	return (
 		<TableContainer>
@@ -43,7 +83,7 @@ const QuestionsTable = ({ data }) => {
 						<col span="1" style={{ width: "15%" }} />
 					</colgroup>
 					<TBody>
-						{data["stat_status_pairs"].map((que, index) => {
+						{getPaginatedData().map((que, index) => {
 							return (
 								<Tr key={index}>
 									<Td>
@@ -78,6 +118,39 @@ const QuestionsTable = ({ data }) => {
 					</TBody>
 				</Table>
 			</Scrollable>
+			{/* <div className="pagination"> */}
+				{/* previous button */}
+				<Pagination style={{padding: "1.2rem 0rem"}}>
+					<Prev
+						onClick={() => {goToPreviousPage()}}
+						disabled={(currentPage === 1 ? true : false)}
+						active={(currentPage===1) ? false: true}
+					>
+						Previous
+					</Prev>
+
+					{/* show page numbers */}
+					{getPaginationGroup().map((item, index) => (
+						<PaginationItem
+							key={index}
+							onClick={(event) => {changePage(event)}}
+							active={(currentPage===item) ? true: false}
+							// className={`paginationItem ${currentPage === item ? 'active' : null}`}
+						>
+						<span>{item}</span>
+						</PaginationItem>
+					))}
+
+					{/* next button */}
+					<Next
+						onClick={() => {goToNextPage()}}
+						disabled={(currentPage === pages ? true : false)}
+						active={(currentPage===pages) ? false: true}
+					>
+						Next
+					</Next>
+				</Pagination>
+			{/* </div> */}
 		</TableContainer>
 	);
 };
