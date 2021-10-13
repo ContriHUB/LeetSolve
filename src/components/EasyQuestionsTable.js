@@ -18,15 +18,20 @@ const EasyQuestionsTable = ({ data }) => {
 		<TableContainer>
 			<Table>
 				<colgroup>
-					<col span="1" style={{ width: "70%" }} />
+
+				    <col span="1" style={{ width: "10%" }} />
+					<col span="1" style={{ width: "50%" }} />
+					<col span="1" style={{ width: "10%" }} />
 					<col span="1" style={{ width: "15%" }} />
 					<col span="1" style={{ width: "15%" }} />
 				</colgroup>
 				<THead>
 					<Tr>
+					    <Th style={{color: "00f2ff"}}>ID</Th>
 						<Th style={{ color: "00f2ff" }}>Title</Th>
-						<Th style={{ color: "pink" }}>Level</Th>
-						<Th style={{ color: "00fff5" }}>Status</Th>
+						<Th style={{ color: "00f2ff" }}>Level</Th>
+						<Th style={{ color: "00f2ff" }}>Status</Th>
+						<Th style={{ color: "00f2ff" }}>Subscription Type</Th>
 					</Tr>
 				</THead>
 			</Table>
@@ -34,7 +39,9 @@ const EasyQuestionsTable = ({ data }) => {
 			<Scrollable maxHeight="68vh">
 				<Table>
 					<colgroup>
-						<col span="1" style={{ width: "70%" }} />
+					    <col span="1" style={{ width: "10%" }} />
+						<col span="1" style={{ width: "50%" }} />
+						<col span="1" style={{ width: "10%" }} />
 						<col span="1" style={{ width: "15%" }} />
 						<col span="1" style={{ width: "15%" }} />
 					</colgroup>
@@ -47,6 +54,9 @@ const EasyQuestionsTable = ({ data }) => {
 							
 							return (
 								<Tr key={index}>
+									<Td>
+										{que["stat"]["frontend_question_id"]}
+									</Td>
 									<Td>
 										<a
 											href={`https://leetcode.com/problems/${que["stat"]["question__title_slug"]}`}
@@ -70,6 +80,12 @@ const EasyQuestionsTable = ({ data }) => {
 											? "Not-AC"
 											: "Not-Attempted"}
 									</Td>
+                                    <Td>
+										{que["paid_only"] === true
+											? "Premium"
+											: "Free"}
+									</Td>
+
 								</Tr>
 							);
 						})}
