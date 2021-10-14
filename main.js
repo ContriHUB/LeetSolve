@@ -28,6 +28,7 @@ const createWindow = () => {
 		
 		autoHideMenuBar: true,
 	});
+	mainWindow.maximize()
 	cookieJar = session.defaultSession.cookies;
 	
 	mainWindow.loadURL(
