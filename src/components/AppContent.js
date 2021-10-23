@@ -7,14 +7,16 @@ import CookieForm from "./CookieForm";
 import CategoryNavBar from "./CategoryNavBar";
 import TableContent from "./TableContent";
 import Popup from "./Popup";
-import { CategoryButton } from "../styles/category";
 
-const AppContent = ({ response, setResponse }) => {
+const AppContent = ({ response, setResponse, handleLoggingOut }) => {
 	const [activeCategory, setActiveCategory] = useState("All Questions"); //name of the currently active category
 	const [popup, setPopup] = useState(false);
 	const [randomQues, setRandomQues] = useState({});
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category); //change the currently active category
+		if (category === 'LogOut') {
+			handleLoggingOut();
+		}
 	};
 	//console.log(response.data.stat_status_pairs);
 	const SelectRandom = () => {
